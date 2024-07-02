@@ -30,17 +30,27 @@
   </head>
   <body>
     <div class="image-container">
-      <img id="kiosk-image" src="1.jpg" alt="Kiosk Image" />
+      <img
+        onclick="changeImage()"
+        id="kiosk-image"
+        src="1.jpg"
+        alt="Kiosk Image"
+      />
     </div>
 
     <script>
       // Array of image sources
-      const images = ["1.jpg", "2.jpg"];
+      const images = ["1.jpg", "2.jpg", "3.jpg", "5.jpg"];
       let currentIndex = 0;
 
       // Function to change the image
       function changeImage() {
         // Get the image element
+        console.log("changing image");
+        if (currentIndex === images.length - 1) {
+          clearInterval(intervalid);
+          console.log("Cleared slideshow!");
+        }
         const imageElement = document.getElementById("kiosk-image");
         // Update the image source
         imageElement.src = images[currentIndex];
@@ -48,9 +58,7 @@
         currentIndex = (currentIndex + 1) % images.length;
       }
 
-      // Set interval to change image every 30 seconds (30000 milliseconds)
-      setInterval(changeImage, 10000);
-      const imgElement = document.getElementById("kiosk-image");
+      let intervalid = setInterval(changeImage, 10000);
     </script>
   </body>
 </html>
